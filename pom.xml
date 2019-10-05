@@ -13,6 +13,7 @@
 	<artifactId>cursomc</artifactId>
 	<version>0.0.1</version>
 	<name>cursomc</name>
+	<packaging>jar</packaging>
 	<description>Estudo de caso Java para curso de Modelagem Conceitual com UML</description>
 
 	<properties>
