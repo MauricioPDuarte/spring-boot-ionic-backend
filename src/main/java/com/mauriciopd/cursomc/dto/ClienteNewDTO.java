@@ -13,39 +13,42 @@ import com.mauriciopd.cursomc.services.validation.ClienteInsert;
 public class ClienteNewDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@NotEmpty(message="Preenchimento obrigatório!")
-	@Length(min=5, max=80, message="O tamanho deve ser entre 3 e 80 caracteres")
+	@NotEmpty(message = "Preenchimento obrigatório!")
+	@Length(min = 5, max = 80, message = "O tamanho deve ser entre 3 e 80 caracteres")
 	private String nome;
-	
-	@NotEmpty(message="Preenchimento obrigátorio")
-	@Email(message="Email inválido")
+
+	@NotEmpty(message = "Preenchimento obrigátorio")
+	@Email(message = "Email inválido")
 	private String email;
-	
-	@NotEmpty(message="Preenchimento obrigátorio")
+
+	@NotEmpty(message = "Preenchimento obrigátorio")
 	private String cpfOuCnpj;
 
 	private Integer tipo;
 
-	@NotEmpty(message="Preenchimento obrigátorio")
+	@NotEmpty(message = "Preenchimento obrigátorio")
 	private String logradouro;
-	
-	@NotEmpty(message="Preenchimento obrigátorio")
+
+	@NotEmpty(message = "Preenchimento obrigátorio")
 	private String numero;
-	
+
 	private String complemento;
 	private String bairro;
-	
-	@NotEmpty(message="Preenchimento obrigátorio")
+
+	@NotEmpty(message = "Preenchimento obrigátorio")
 	private String cep;
 
-	@NotEmpty(message="Preenchimento obrigátorio")
+	@NotEmpty(message = "Preenchimento obrigátorio")
 	private String telefone1;
-	
+
 	private String telefone2;
-	
+
 	private String telefone3;
 
 	private Integer cidadeId;
+
+	@NotEmpty(message = "Preenchimento obrigátorio")
+	private String senha;
 
 	public ClienteNewDTO() {
 	}
@@ -152,6 +155,14 @@ public class ClienteNewDTO implements Serializable {
 
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 }
