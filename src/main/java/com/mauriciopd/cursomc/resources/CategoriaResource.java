@@ -25,6 +25,10 @@ import com.mauriciopd.cursomc.domain.Categoria;
 import com.mauriciopd.cursomc.dto.CategoriaDTO;
 import com.mauriciopd.cursomc.services.CategoriaService;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @RestController
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
@@ -32,12 +36,14 @@ public class CategoriaResource {
 	@Autowired
 	private CategoriaService service;
 
+	@ApiOperation(value="Busca por id")
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Categoria> find(@PathVariable Integer id) {
 		Categoria obj = service.find(id);
 		return ResponseEntity.ok(obj);
 	}
 
+	@ApiOperation(value="Inseri categoria")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PostMapping
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO objDto) {
@@ -49,6 +55,7 @@ public class CategoriaResource {
 		return ResponseEntity.created(uri).build();
 	}
 
+	@ApiOperation(value="Atualiza categoria")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<Void> update(@Valid @RequestBody CategoriaDTO objDto, @PathVariable Integer id) {
@@ -58,6 +65,7 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@ApiOperation(value="Deleta categoria")
 	@PreAuthorize("hasAnyRole('ADMIN')")
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Integer id) {
@@ -65,6 +73,10 @@ public class CategoriaResource {
 		return ResponseEntity.noContent().build();
 	}
 
+	@ApiOperation(value="Lista categorias")
+	@ApiResponses(value = {
+			@ApiResponse(code = 400, message = "Não é possível excluir uma categoria que possui produtos"),
+			@ApiResponse(code = 404, message = "Código inexistente") })
 	@GetMapping
 	public ResponseEntity<List<CategoriaDTO>> findAll() {
 		List<Categoria> list = service.findAll();
@@ -72,6 +84,7 @@ public class CategoriaResource {
 		return ResponseEntity.ok(listDto);
 	}
 
+	@ApiOperation(value="Lista categorias com paginacao")
 	@GetMapping(value = "/page")
 	public ResponseEntity<Page<CategoriaDTO>> findPage(@RequestParam(value = "page", defaultValue = "0") Integer page,
 			@RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
